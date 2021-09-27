@@ -1,12 +1,21 @@
 # Setup
-title:        Software Crafting
-tagline:      JVM, GNU/Linux and General tech #by Nicolas Dupouy
+title:                  Software Crafting
+tagline:                JVM, GNU/Linux and General tech #by Nicolas Dupouy
 description: >- # this means to ignore newlines until "baseurl:"
   Billets d'un développeur passionné
 
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl:  "" # the subpath of your site, e.g. /blog
-locale:   "en"
+baseurl:                "" # the subpath of your site, e.g. /blog
+locale:                 "en"
+
+# Social
+email:                  nicolasdupouy@gmail.com
+linkedin_username:      nicolasdupouy
+twitter_username:       nicolas_dupouy
+github_username:        nicolasdupouy
+stackoverflow_username: 2017611/nicolas-dupouy
+
+
 
 # Gems
 gems:
