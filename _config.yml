@@ -1,8 +1,12 @@
 # Setup
-name:         Project or Site name (Architect Theme)
-tagline:      A responsive theme for your project on GitHub Pages
-baseurl:      ""
-locale:       "en"
+title:        Software Crafting
+tagline:      JVM, GNU/Linux and General tech #by Nicolas Dupouy
+description: >- # this means to ignore newlines until "baseurl:"
+  Billets d'un développeur passionné
+
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl:  "" # the subpath of your site, e.g. /blog
+locale:   "en"
 
 # Gems
 gems:
