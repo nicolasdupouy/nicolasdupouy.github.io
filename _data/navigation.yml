@@ -1,0 +1,6 @@
+# Navigation
+sections:
+  - text: Home
+    url: /
+  - text: Contact
+    url: /contact
