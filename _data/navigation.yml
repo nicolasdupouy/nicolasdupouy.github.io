@@ -1,6 +1,6 @@
 # Navigation
 sections:
-  - text: Home
+  - text: Blog
     url: /
   - text: Contact
     url: /contact
