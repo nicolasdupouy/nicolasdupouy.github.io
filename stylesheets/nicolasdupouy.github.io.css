@@ -4,6 +4,28 @@
     font-weight: normal;
 }
 
+nav {
+    position: relative;
+    width: 1140px;
+    margin: 0 auto;
+}
+
+nav ul {
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+nav ul li a {
+    color: lightcoral;
+}
+
 .social__networks {
     padding: 10px 15px 10px 15px;
     font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;

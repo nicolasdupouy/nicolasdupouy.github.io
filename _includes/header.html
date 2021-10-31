@@ -1,7 +1,14 @@
 <header>
     <div class="inner">
+        <nav>
+            <ul>
+                {% for section in site.data.navigation.sections %}
+                <li><a href={{ section.url }}>{{ section.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
         <div class="site__title">
-            <a href="/{{ site.baseurl }}">{{ site.title }}</a>
+            <a href=/{{ site.baseurl }}>{{ site.title }}</a>
         </div>
         <h2> {{ site.tagline }} </h2>
 
