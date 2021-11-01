@@ -1,15 +1,30 @@
 # How to
 ## Installation
-> install `rbenv` on Debian
+### Install `rbenv` on Debian
 
-    sudo apt-get install rbenv
-    rbenv install 2.7.1
-    rbenv global 2.7.1
+    $ sudo apt-get install rbenv
+    $ rbenv install 2.7.1
+    $ rbenv global 2.7.1
 
-> install necessary gems
+Add this to the shell configuration file:
 
-    rbenv shell 2.7.1
-    bundle install
+    # Load rbenv automatically by appending the following to ~/.zshrc:
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+
+Then source it:
+
+    $ source ~/.zshrc
+
+### Install the gems:
+
+    $ gem install jekyll bundler
+
+### Initialize the project
+In its directory:
+
+    $ bundle install
+
 
 ## Serve the site locally
 Build the site and make it available on a local server (http://localhost:4000):
