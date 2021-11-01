@@ -16,14 +16,23 @@ Then source it:
 
     $ source ~/.zshrc
 
+
+### Nota Bene: General commands
+- List installed Ruby versions: `rbenv versions`
+- list latest stable versions: `rbenv install -l`
+- Get a RubyGems Environment overview: `gem env`
+
+
 ### Install the gems:
 
     $ gem install jekyll bundler
+
 
 ### Initialize the project
 In its directory:
 
     $ bundle install
+
 
 
 ## Serve the site locally
