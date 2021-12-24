@@ -1,38 +1,47 @@
 # How to
 ## Installation
-### Install `rbenv` on Debian
+### 1) Ruby with `rbenv`
+#### [Debian]
 
     $ sudo apt-get install rbenv
     $ rbenv install 2.7.1
     $ rbenv global 2.7.1
 
-Add this to the shell configuration file:
+Load rbenv automatically by appending the following to the shell configuration file (ex: ~/.profile):
 
-    # Load rbenv automatically by appending the following to ~/.zshrc:
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 
-Then source it:
+#### [Apple M1 Macbook]
+    $ brew install rbenv ruby-build
+    $ rbenv install 3.0.0
+    $ rbenv global 3.0.0
+    $ rbenv rehash
+    $ echo 'eval "$(rbenv init - zsh)"' >> ~/.profile
 
-    $ source ~/.zshrc
-
-
-### Nota Bene: General commands
+#### Nota Bene: General commands
 - List installed Ruby versions: `rbenv versions`
 - list latest stable versions: `rbenv install -l`
 - Get a RubyGems Environment overview: `gem env`
 
 
-### Install the gems:
-
-    $ gem install jekyll bundler
 
 
-### Initialize the project
-In its directory:
 
+### 2) Install the gems:
+    $ gem install --user-install bundler jekyll
+    $ echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.profile
+
+### 3) Initialize the project (in the project directory)
+#### [Debian]
     $ bundle install
 
+#### [Apple M1 Macbook]
+For M1 Mac, we may need to do a few extra steps - update bundler, add webrick, and rebuild everything.
+
+    $ bundle update --bundler
+    $ bundle add webrick
+    $ bundle install --redownload
 
 
 ## Serve the site locally
