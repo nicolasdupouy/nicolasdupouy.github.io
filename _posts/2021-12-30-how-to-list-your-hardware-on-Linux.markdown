@@ -48,7 +48,7 @@ sr0
 It gives in particular the UUID of your partitions which is useful if you want to use them in your file system table `/etc/fstab`.
 
 As you can see on my own :
-![/etc/fstab](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png)
+![/etc/fstab][/etc/fstab]
 
 NB: The partition UUID can also be find with the `blkid` command:
 
@@ -201,3 +201,5 @@ The class name can be found in the previous output.
     capabilities: removable audio cd-r cd-rw dvd dvd-r dvd-ram
     configuration: ansiversion=5 status=nodisc
 {% endhighlight %}
+
+[/etc/fstab]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png
