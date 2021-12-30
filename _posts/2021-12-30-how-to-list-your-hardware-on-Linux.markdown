@@ -6,10 +6,16 @@ date-update:   N/A
 date:   2021-12-30 10:00:00 +0200
 categories: gnu linux hardware terminal command line lsblk blkid lshw
 permalink: /2021-12-30-how-to-list-your-hardware-on-Linux/
+toc: true
 ---
+**Table of Contents**
+{% toc %}
+<BR/>
+
+<h3>1) Introduction</h3>
 Here is a quick and comprehensive explanation on how to list your hardware on Linux.
 
-<h3>Disks</h3>
+<h3>2) Disks</h3>
 If you want to inspect your available disks, a good start is the `lsblk` command (as they are block devices).
 
 {% highlight conf %}
@@ -64,7 +70,7 @@ NB: The partition UUID can also be find with the `blkid` command:
 {% endhighlight %}
 
 
-<h3>Hardware</h3>
+<h3>3) Hardware general overview</h3>
 To have a more general overview, the `lshw` command can extract detailed information on the hardware configuration of the machine.
 this command should be run as root if you want to have a complete overview on your hardware.
 

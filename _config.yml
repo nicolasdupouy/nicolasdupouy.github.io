@@ -17,9 +17,11 @@ stackoverflow_username: 2017611/nicolas-dupouy
 
 getform_endpoint:       c852e9d2-9c50-4fde-881f-e097141f93c7
 
-# Gems
 gems:
   - jekyll-paginate
+
+plugins:
+  - jekyll-toc
 
 #Others
 highlighter: rouge
