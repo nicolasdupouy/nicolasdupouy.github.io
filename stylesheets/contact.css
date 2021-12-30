@@ -1,0 +1,32 @@
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 2fr;
+}
+
+label {
+    font-weight: bolder;
+}
+
+.contact-row-full {
+    /* border: 1px solid blue; */
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.contact-row-half-left {
+    /*height: 100px;*/
+    /*border: 1px solid red;*/
+}
+
+.contact-row-half-right {
+    /*height: 100px;*/
+    /*border: 1px solid yellow;*/
+}
+
+
+.contact-input {
+    height: 100%;
+    width: 80%;
+}
+

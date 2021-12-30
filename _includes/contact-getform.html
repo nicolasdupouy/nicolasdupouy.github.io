@@ -1,0 +1,107 @@
+<form action="https://getform.io/f/{{site.getform_endpoint}}"
+      enctype="multipart/form-data"
+      method="POST"
+      target="_blank">
+    <div class="contact-form">
+        <div class="contact-row-half-left">
+            <label>Prénom:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Prénom *" class="contact-input" required="required">
+        </div>
+        <div class="contact-row-half-right">
+            <label>Nom:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Nom *" class="contact-input" required="required">
+        </div>
+        <div class="contact-row-half-left">
+            <label>Email:</label>
+            <input type="email" id="email" name="email" laceholder="Email *" class="contact-input" required="required">
+        </div>
+        <div class="contact-row-half-right">
+            <label>Téléphone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Téléphone *" class="contact-input">
+        </div>
+        <div class="contact-row-full">
+            <!--Objet de votre message:-->
+            <input type="text" id="object" name="object" placeholder="Objet *" class="contact-input" required="required">
+        </div>
+        <div class="contact-row-full">
+            <!--Message:-->
+            <input type="text" id="message" name="message" placeholder="Message *" class="contact-input" required="required">
+        </div>
+    </div>
+</form>
+
+
+<!-- Add the getform-endpoint in config.yml -->
+<form action="https://getform.io/f/{{site.getform_endpoint}}"
+      enctype="multipart/form-data"
+      method="POST"
+      target="_blank">
+    <div class="form-group">
+        <label for="contact_form_name">Your Name :</label>
+        <input type="text" class="form-control" name="name" id="contact_form_name" placeholder="Enter Your Name">
+    </div>
+    <div class="form-group">
+        <label for="contact_form_email">Your Email :</label>
+        <input type="email" class="form-control" name="email" id="contact_form_email" placeholder="Enter Your Email">
+    </div>
+    <div class="form-group">
+        <label for="contact_form_message"> Your Message :</label>
+        <textarea name="message" class="form-control" id="contact_form_message"
+                  placeholder="Enter Your Message"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="contact-form-file"> Attachment :</label>
+        <input type="file" name="file" class="form-control" id="contact-form-file" placeholder="Attach files"/>
+    </div>
+    <button type="submit" value="Send" class="btn btn-lg btn-dark">Submit</button>
+</form>
+
+<!--<form id="contactForm" name="sentMessage" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom *" required="required">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom *" required="required">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email *" required="required">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Téléphone">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="text" id="subject" name="subject" class="form-control" placeholder="Objet *" required="required">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea id="message" name="message" class="form-control" rows="4" placeholder="Message *" required="required"></textarea>
+        <p class="help-block text-danger"></p>
+    </div>
+    <h6 id="requiredFields">* Champs obligatoire</h6>
+    <div id="success"></div>
+
+    <button id="contactFormButton" type="submit" class="btn btn-default">
+						<span class="spinner-visibility">
+							<span class="fa fa-spinner fa-spin" style="font-size:16px"></span>
+							&nbsp;&nbsp;&nbsp;
+						</span>
+        Envoyer
+    </button>
+
+</form>-->
