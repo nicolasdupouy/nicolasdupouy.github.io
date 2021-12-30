@@ -10,9 +10,6 @@ Here is a quick and comprehensive explanation on how to list your hardware on Li
 
 <h3>Disks</h3>
 If you want to inspect your available disks, a good start is the `lsblk` command (as they are block devices).
-{% comment %}
-![lsblk](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/1-lsbk.png)
-{% endcomment %}
 
 {% highlight conf %}
 ❯ lsblk
@@ -31,9 +28,6 @@ sr0     11:0    1  1024M  0 rom
 {% endhighlight %}
 
 This command is often used with the `--fs` option as it provides more information like the filesystem types, the percentage of disk used and the percentage of disk available.
-{% comment %}
-![lsblk --fs](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/2-lsblk_fs.png)
-{% endcomment %}
 
 {% highlight conf %}
 ❯ lsblk --fs
@@ -54,12 +48,9 @@ sr0
 It gives in particular the UUID of your partitions which is useful if you want to use them in your file system table `/etc/fstab`.
 
 As you can see on my own :
-![/etc/fstab](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/3-etc-fstab.png)
+![/etc/fstab](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png)
 
 NB: The partition UUID can also be find with the `blkid` command:
-{% comment %}
-![sudo blkid](/assets/2021-12-30-how-to-list-your-hardware-on-Linux/4-sudo_blkid.png)
-{% endcomment %}
 
 {% highlight conf %}
 ❯ sudo blkid
