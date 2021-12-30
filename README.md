@@ -47,14 +47,48 @@ For M1 Mac, we may need to do a few extra steps - update bundler, add webrick, a
 ## Serve the site locally
 Build the site and make it available on a local server (http://localhost:4000):
 
-    bundle exec jekyll serve
+    > bundle exec jekyll serve
 
 Pass the `--port` option to specify another port
 
-    bundle exec jekyll serve --port 4002
+    > bundle exec jekyll serve --port 4002
 
 Pass the `--livereload` option to automatically refresh the page with each change you make to the source files:
 
-    bundle exec jekyll serve --livereload
+    > bundle exec jekyll serve --livereload
 
 [Jekyll quickstart]: https://jekyllrb.com/docs/
+
+## Language Highlighting
+
+### Get the list
+
+To find the available language highlighting, use the `rougify` command embedded with Jekyll:
+
+    > rougify list
+
+### Insert the code in the posts:
+
+```
+{% highlight cpp %}
+#include <iostream>
+using namespace std;
+
+int main() 
+{    
+    cout << "Size of char: " << sizeof(char) << " byte" << endl;
+    cout << "Size of int: " << sizeof(int) << " bytes" << endl;
+    cout << "Size of float: " << sizeof(float) << " bytes" << endl;
+    cout << "Size of double: " << sizeof(double) << " bytes" << endl;
+
+    return 0;
+}
+{% endhighlight %}
+```
+
+### Expected result:
+
+![C++ Program to Find Size of int, float, double and char in Your System](/assets/exemple-cpp-code-for-README.png)
+
+
+[What Are The Supported Language Highlighters In Jekyll]: https://simpleit.rocks/ruby/jekyll/what-are-the-supported-language-highlighters-in-jekyll/
