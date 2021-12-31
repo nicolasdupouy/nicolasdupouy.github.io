@@ -1,10 +1,7 @@
 # Setup
 title:                  Software Crafting
 tagline:                JVM, GNU/Linux and General tech #by Nicolas Dupouy
-description: >- # this means to ignore newlines until "baseurl:"
-  Billets d'un développeur passionné
-
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url:                    "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl:                "" # the subpath of your site, e.g. /blog
 locale:                 "en"
 
@@ -15,14 +12,12 @@ twitter_username:       nicolas_dupouy
 github_username:        nicolasdupouy
 stackoverflow_username: 2017611/nicolas-dupouy
 
-getform_endpoint:       c852e9d2-9c50-4fde-881f-e097141f93c7
+# Jekyll
+highlighter: rouge
+markdown: kramdown
 
 plugins:
   - jekyll-paginate
-
-#Others
-highlighter: rouge
-markdown: kramdown
 
 exclude:
   - Gemfile
