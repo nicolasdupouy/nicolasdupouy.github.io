@@ -1,11 +1,9 @@
 ---
-layout: post
-title:  "How to list your hardware on Linux"
-date-creation:   2021-12-30 10:00:00 +0200
-date-update:   N/A
-date:   2021-12-30 10:00:00 +0200
-categories: gnu linux hardware terminal command line lsblk blkid lshw
-permalink: /2021-12-30-how-to-list-your-hardware-on-Linux/
+layout:             post
+title:              "How to list your hardware on Linux"
+date-publication:   2021-12-30 10:00:00 +0200
+categories:         gnu linux hardware terminal command line lsblk blkid lshw
+permalink:          /2021-12-30-how-to-list-your-hardware-on-Linux/
 toc: true
 ---
 
