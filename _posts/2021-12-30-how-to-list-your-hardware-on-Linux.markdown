@@ -13,11 +13,10 @@ toc: true
 * TOC
 {:toc}
 
-<BR/>
+<BR>
 
 
-## Introduction
-Here is a quick and comprehensive explanation on how to list your hardware on Linux.
+
 
 ## Disks
 If you want to inspect your available disks, a good start is the `lsblk` command (as they are block devices).
