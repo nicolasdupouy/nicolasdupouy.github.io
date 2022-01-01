@@ -16,7 +16,9 @@ toc: true
 
 
 
-## Disks
+## Zoom on disks
+### `lsblk`
+
 If you want to inspect your available disks, a good start is the `lsblk` command (as they are block devices).
 
 {% highlight conf %}
@@ -58,6 +60,8 @@ It gives in particular the UUID of your partitions which is useful if you want t
 As you can see on my own :
 ![/etc/fstab][/etc/fstab]
 
+### `blkid`
+
 NB: The partition UUID can also be find with the `blkid` command:
 
 {% highlight conf %}
@@ -70,6 +74,71 @@ NB: The partition UUID can also be find with the `blkid` command:
 /dev/sdc1: LABEL="data-partition" UUID="68f066c6-181c-4be0-b2f6-af927705cf8a" BLOCK_SIZE="4096" TYPE="ext4" PARTLABEL="primary" PARTUUID="6e57131a-17c4-4191-8e5d-e905acb5a019"
 {% endhighlight %}
 
+Other commands exists. Let's discover some of it.
+
+### `findmnt`
+
+`findmnt` will list all mounted filesystems.
+
+{% highlight conf %}
+❯ findmnt
+TARGET                         SOURCE      FSTYPE      OPTIONS
+/                              /dev/sda3   ext4        rw,relatime,errors=remount-ro
+├─/sys                         sysfs       sysfs       rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/kernel/security       securityfs  securityfs  rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/cgroup             cgroup2     cgroup2     rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot
+│ ├─/sys/fs/pstore             pstore      pstore      rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/bpf                none        bpf         rw,nosuid,nodev,noexec,relatime,mode=700
+│ ├─/sys/kernel/debug          debugfs     debugfs     rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/kernel/tracing        tracefs     tracefs     rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/kernel/config         configfs    configfs    rw,nosuid,nodev,noexec,relatime
+│ └─/sys/fs/fuse/connections   fusectl     fusectl     rw,nosuid,nodev,noexec,relatime
+├─/proc                        proc        proc        rw,nosuid,nodev,noexec,relatime
+│ └─/proc/sys/fs/binfmt_misc   systemd-1   autofs      rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=13551
+│   └─/proc/sys/fs/binfmt_misc binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime
+├─/dev                         udev        devtmpfs    rw,nosuid,relatime,size=10203524k,nr_inodes=2550881,mode=755
+│ ├─/dev/pts                   devpts      devpts      rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000
+│ ├─/dev/shm                   tmpfs       tmpfs       rw,nosuid,nodev
+│ ├─/dev/hugepages             hugetlbfs   hugetlbfs   rw,relatime,pagesize=2M
+│ └─/dev/mqueue                mqueue      mqueue      rw,nosuid,nodev,noexec,relatime
+├─/run                         tmpfs       tmpfs       rw,nosuid,nodev,noexec,relatime,size=2047848k,mode=755
+│ ├─/run/lock                  tmpfs       tmpfs       rw,nosuid,nodev,noexec,relatime,size=5120k
+│ └─/run/user/1000             tmpfs       tmpfs       rw,nosuid,nodev,relatime,size=2047844k,nr_inodes=511961,mode=700,uid=1000,gid=1000
+│   └─/run/user/1000/doc       portal      fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000
+├─/home                        /dev/sdb2   ext4        rw,relatime
+├─/opt                         /dev/sdb1   ext4        rw,relatime
+└─/mnt/4To                     /dev/sdc1   ext4        rw,relatime
+{% endhighlight %}
+
+As you can see, it is not limited to the physical disks.
+To stick a bit more to what we were looking at with the previous command, we could filter on a filesystem type.
+
+{% highlight conf %}
+❯ findmnt -t ext4
+TARGET     SOURCE    FSTYPE OPTIONS
+/          /dev/sda3 ext4   rw,relatime,errors=remount-ro
+├─/home    /dev/sdb2 ext4   rw,relatime
+├─/opt     /dev/sdb1 ext4   rw,relatime
+└─/mnt/4To /dev/sdc1 ext4   rw,relatime
+{% endhighlight %}
+
+Or ask for a straight list.
+
+{% highlight conf %}
+❯ findmnt -t ext4 -l
+TARGET   SOURCE    FSTYPE OPTIONS
+/        /dev/sda3 ext4   rw,relatime,errors=remount-ro
+/home    /dev/sdb2 ext4   rw,relatime
+/opt     /dev/sdb1 ext4   rw,relatime
+/mnt/4To /dev/sdc1 ext4   rw,relatime
+{% endhighlight %}
+
+
+### Other commands
+
+You can also analyse your disks with command line programs to manipulate disk partitions like `fdisk`, `cfdisk` or `parted` but we won't cover it.
+
+Of course, there is also the GUI programs like `gnome-disks` (*"Disks"* in the application list) and `gnome-system-monitor` (*"System Monitor"* in the application list -tab *"File Systems"*-). but we won't cover it either.
 
 ## Hardware general overview
 To have a more general overview, the `lshw` command can extract detailed information on the hardware configuration of the machine.
@@ -209,5 +278,6 @@ The class name can be found in the previous output.
     capabilities: removable audio cd-r cd-rw dvd dvd-r dvd-ram
     configuration: ansiversion=5 status=nodisc
 {% endhighlight %}
+
 
 [/etc/fstab]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png
