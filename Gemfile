@@ -8,3 +8,5 @@ group :jekyll_plugins do
     gem 'kramdown'
     gem 'pygments.rb'
 end
+
+gem "webrick", "~> 1.7"
