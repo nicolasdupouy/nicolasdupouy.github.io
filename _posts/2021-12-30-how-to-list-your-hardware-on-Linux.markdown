@@ -134,6 +134,124 @@ TARGET   SOURCE    FSTYPE OPTIONS
 {% endhighlight %}
 
 
+### `hwinfo`
+
+`hwinfo` focus on the hardware, not how it is used. For example, you won't have information on the partitions presents on your disks.
+For info, it is by default not installed on my Debian base system. And may not be installed with your distribution.
+
+So first, install it:
+
+{% highlight console %}
+❯ sudo apt-get install hwinfo
+{% endhighlight %}
+
+Like `lshw` that we will see later, the output of this command is verbose. I mean really verbose !
+For the sake of the readability, I will focus on the disks output with the `--disk` option.
+
+{% highlight conf %}
+❯ sudo hwinfo --disk
+25: IDE 201.0: 10600 Disk
+[Created at block.245]
+Unique ID: WZeP.58v_ZBYayE1
+Parent ID: w7Y8.0iikP2qMHRD
+SysFS ID: /class/block/sdb
+SysFS BusID: 2:0:1:0
+SysFS Device Link: /devices/pci0000:00/0000:00:1f.2/ata3/host2/target2:0:1/2:0:1:0
+Hardware Class: disk
+Model: "Samsung SSD 860"
+Vendor: "Samsung"
+Device: "SSD 860"
+Revision: "1B6Q"
+Serial ID: "S3Z2NB0K938341W"
+Driver: "ata_piix", "sd"
+Driver Modules: "ata_piix", "sd_mod"
+Device File: /dev/sdb
+Device Number: block 8:16-8:31
+Geometry (Logical): CHS 60801/255/63
+Size: 976773168 sectors a 512 bytes
+Capacity: 465 GB (500107862016 bytes)
+Config Status: cfg=new, avail=yes, need=no, active=unknown
+Attached to: #2 (IDE interface)
+
+26: IDE 400.0: 10600 Disk
+[Created at block.245]
+Unique ID: _kuT.ik+ULzuWpw8
+Parent ID: W60f._7e2gtd+2K9
+SysFS ID: /class/block/sdc
+SysFS BusID: 4:0:0:0
+SysFS Device Link: /devices/pci0000:00/0000:00:1f.5/ata5/host4/target4:0:0/4:0:0:0
+Hardware Class: disk
+Model: "ST4000DM004-2CV1"
+Device: "ST4000DM004-2CV1"
+Revision: "0001"
+Serial ID: "WFN0DNST"
+Driver: "ata_piix", "sd"
+Driver Modules: "ata_piix", "sd_mod"
+Device File: /dev/sdc
+Device Number: block 8:32-8:47
+Geometry (Logical): CHS 486401/255/63
+Size: 7814037168 sectors a 512 bytes
+Capacity: 3726 GB (4000787030016 bytes)
+Config Status: cfg=new, avail=yes, need=no, active=unknown
+Attached to: #13 (IDE interface)
+
+27: IDE 200.0: 10600 Disk
+[Created at block.245]
+Unique ID: 3OOL.2CfeXKYl9DC
+Parent ID: w7Y8.0iikP2qMHRD
+SysFS ID: /class/block/sda
+SysFS BusID: 2:0:0:0
+SysFS Device Link: /devices/pci0000:00/0000:00:1f.2/ata3/host2/target2:0:0/2:0:0:0
+Hardware Class: disk
+Model: "Samsung SSD 840"
+Vendor: "Samsung"
+Device: "SSD 840"
+Revision: "BB6Q"
+Serial ID: "S1DBNSBF775887Z"
+Driver: "ata_piix", "sd"
+Driver Modules: "ata_piix", "sd_mod"
+Device File: /dev/sda
+Device Number: block 8:0-8:15
+Geometry (Logical): CHS 30401/255/63
+Size: 488397168 sectors a 512 bytes
+Capacity: 232 GB (250059350016 bytes)
+Config Status: cfg=new, avail=yes, need=no, active=unknown
+Attached to: #2 (IDE interface)
+{% endhighlight %}
+
+Or even more concise:
+{% highlight conf %}
+❯ sudo hwinfo --disk --short
+disk:
+/dev/sdb             Samsung SSD 860
+/dev/sdc             ST4000DM004-2CV1
+/dev/sda             Samsung SSD 840
+{% endhighlight %}
+
+
+
+### `df`
+A widely used command to report file system disk space usage on your partitions is `df`. You will get the *devices*, what are their *mount points*, the *sizes*, etc.
+The issue here is that only the mounted partitions will be displayed.
+
+To get a human readable output, use the `-h` option.
+{% highlight conf %}
+❯ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            9.8G     0  9.8G   0% /dev
+tmpfs           2.0G  3.0M  2.0G   1% /run
+/dev/sda3        32G   24G  6.6G  78% /
+tmpfs           9.8G  157M  9.7G   2% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+/dev/sdb2       201G   95G   96G  50% /home
+/dev/sdb1       256G   70G  173G  29% /opt
+/dev/sdc1       3.6T  1.4T  2.1T  39% /mnt/4To
+tmpfs           2.0G  128K  2.0G   1% /run/user/100
+{% endhighlight %}
+
+It won't focus on the *real* physical disk partitions. This is why in my case it display *tmpfs* type partitions.
+
+
 ### Other commands
 
 You can also analyse your disks with command line programs to manipulate disk partitions like `fdisk`, `cfdisk` or `parted` but we won't cover it.
