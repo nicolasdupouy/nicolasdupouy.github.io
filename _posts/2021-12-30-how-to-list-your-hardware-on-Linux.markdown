@@ -251,6 +251,27 @@ tmpfs           2.0G  128K  2.0G   1% /run/user/100
 
 It won't focus on the *real* physical disk partitions. This is why in my case it display *tmpfs* type partitions.
 
+### `lsscsi`
+
+Historically, disks could be of type [IDE][IDE] or [SCSI][SCSI] depending on the physical interfaces used to connect it on your motherboard. Without entering too much in the details, cables, speed and prices where different.
+More importantly, they were attached by Linux to device names with a `hd` prefix for the [IDE][IDE] devices, and a `sd` prefix for the [SCSI][SCSI] devices.
+
+- `/dev/hdXY` for IDE
+- `/dev/sdXY` for SCSI.
+ 
+Where `X` is a letter and `Y` is a number.
+
+On today computers, you probably use [SATA][SATA] or [NVM Express][NVMe] but Linux now uses the SCSI host adapter to communicates with them, and map all of them on `/dev/sdXY` devices.
+
+This is why the `lsscsi` command is a good alternative to list your disks.
+The `-g` option output the SCSI generic device file name.
+
+{% highlight conf %}
+❯ lsscsi -g
+[2:0:0:0]    disk    ATA      Samsung SSD 840  BB6Q  /dev/sda   /dev/sg0
+[2:0:1:0]    disk    ATA      Samsung SSD 860  1B6Q  /dev/sdb   /dev/sg1
+[4:0:0:0]    disk    ATA      ST4000DM004-2CV1 0001  /dev/sdc   /dev/sg2
+{% endhighlight %}
 
 ### Other commands
 
@@ -399,3 +420,7 @@ The class name can be found in the previous output.
 
 
 [/etc/fstab]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png
+[IDE]: https://en.wikipedia.org/wiki/Parallel_ATA
+[SCSI]: https://en.wikipedia.org/wiki/SCSI
+[SATA]: https://en.wikipedia.org/wiki/Serial_ATA
+[NVMe]: https://en.wikipedia.org/wiki/NVM_Express
