@@ -58,11 +58,11 @@ sr0
 It gives in particular the UUID of your partitions which is useful if you want to use them in your file system table `/etc/fstab`.
 
 As you can see on my own :
-![/etc/fstab][/etc/fstab]
+![/etc/fstab][/etc/fstab SCREENSHOT]
 
 ### `blkid`
 
-NB: The partition UUID can also be find with the `blkid` command:
+<u>NB:</u> The partition UUID can also be find with the `blkid` command:
 
 {% highlight conf %}
 ❯ sudo blkid
@@ -419,8 +419,158 @@ The class name can be found in the previous output.
 {% endhighlight %}
 
 
-[/etc/fstab]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png
+## Diving deeper into your system
+The tools discussed previously are user-space commands. As you may have noticed, most of them references the `/dev` directory.
+
+As explained in this [book][How LINUX works]:
+
+![How LINUX works][How LINUX works SCREENSHOT]
+
+```
+    "The Traditional Unix /dev directory is a convenient way for user processes to reference
+and interface with devices supported by the kernel, but it's also a very simplistic scheme.
+The name of the device in /dev tells you a little about the device, but not a lot.
+Another problem is that the kernel assigns devices in the order in which they are found,
+so a device may have a different name between reboots.
+
+    To provide a uniform view for attached devices based on their actual hardware attributes,
+the Linux kernel offers the sysfs interface through a system of files and directories.
+The base path for devices is /sys/devices."
+```
+
+
+![TEST][TEST]
+
+which is a convenient way for user processes to reference and interface with devices supported by the kernel.
+It gets its information from the kernel (understand Linux) or more exactly from the `/proc` and `/sys` directories dynamically controlled by it.
+
+<u>NB:</u> The same logic applies in the \*BSD systems (***point to check***).
+
+To be sure let's investigate a little bit more on my first disk `/dev/sda`, I'am going to use a last user-space command which is `udevadm`:
+
+{% highlight conf %}
+❯ udevadm info --query=all --name=/dev/sda
+P: /devices/pci0000:00/0000:00:1f.2/ata3/host2/target2:0:0/2:0:0:0/block/sda
+N: sda
+L: 0
+S: disk/by-path/pci-0000:00:1f.2-ata-1
+S: disk/by-id/wwn-0x50025388a05d658a
+S: disk/by-id/ata-Samsung_SSD_840_EVO_250GB_S1DBNSBF775887Z
+S: disk/by-path/pci-0000:00:1f.2-ata-1.0
+E: DEVPATH=/devices/pci0000:00/0000:00:1f.2/ata3/host2/target2:0:0/2:0:0:0/block/sda
+E: DEVNAME=/dev/sda
+E: DEVTYPE=disk
+E: MAJOR=8
+E: MINOR=0
+E: SUBSYSTEM=block
+E: USEC_INITIALIZED=3709023
+E: ID_ATA=1
+E: ID_TYPE=disk
+E: ID_BUS=ata
+E: ID_MODEL=Samsung_SSD_840_EVO_250GB
+E: ID_MODEL_ENC=Samsung\x20SSD\x20840\x20EVO\x20250GB\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20
+E: ID_REVISION=EXT0BB6Q
+E: ID_SERIAL=Samsung_SSD_840_EVO_250GB_S1DBNSBF775887Z
+E: ID_SERIAL_SHORT=S1DBNSBF775887Z
+E: ID_ATA_WRITE_CACHE=1
+E: ID_ATA_WRITE_CACHE_ENABLED=1
+E: ID_ATA_FEATURE_SET_HPA=1
+E: ID_ATA_FEATURE_SET_HPA_ENABLED=1
+E: ID_ATA_FEATURE_SET_PM=1
+E: ID_ATA_FEATURE_SET_PM_ENABLED=1
+E: ID_ATA_FEATURE_SET_SECURITY=1
+E: ID_ATA_FEATURE_SET_SECURITY_ENABLED=0
+E: ID_ATA_FEATURE_SET_SECURITY_ERASE_UNIT_MIN=2
+E: ID_ATA_FEATURE_SET_SECURITY_ENHANCED_ERASE_UNIT_MIN=8
+E: ID_ATA_FEATURE_SET_SECURITY_FROZEN=1
+E: ID_ATA_FEATURE_SET_SMART=1
+E: ID_ATA_FEATURE_SET_SMART_ENABLED=1
+E: ID_ATA_DOWNLOAD_MICROCODE=1
+E: ID_ATA_SATA=1
+E: ID_ATA_SATA_SIGNAL_RATE_GEN2=1
+E: ID_ATA_SATA_SIGNAL_RATE_GEN1=1
+E: ID_ATA_ROTATION_RATE_RPM=0
+E: ID_WWN=0x50025388a05d658a
+E: ID_WWN_WITH_EXTENSION=0x50025388a05d658a
+E: ID_PATH=pci-0000:00:1f.2-ata-1.0
+E: ID_PATH_TAG=pci-0000_00_1f_2-ata-1_0
+E: ID_PATH_ATA_COMPAT=pci-0000:00:1f.2-ata-1
+E: ID_PART_TABLE_UUID=89a6622e
+E: ID_PART_TABLE_TYPE=dos
+E: DEVLINKS=/dev/disk/by-path/pci-0000:00:1f.2-ata-1 /dev/disk/by-id/wwn-0x50025388a05d658a /dev/disk/by-id/ata-Samsung_SSD_840_EVO_250GB_S1DBNSBF775887Z /dev/disk/by-path/pci-0000:00:1f.2-ata-1.0
+E: TAGS=:systemd:
+E: CURRENT_TAGS=:systemd:
+{% endhighlight %}
+
+As you may have noticed on one of the last lines starting by **DEVLINKS=**, it tells that our disk is referenced by multitudes of ways (the UUID for exemple that we saw with the `lsblk`and `blkid` commands).
+if we check, this is what we see:
+
+{% highlight conf %}
+❯ ll /dev/disk
+total 0
+drwxr-xr-x  2 root root  420 Jan  3 18:34 by-path/
+drwxr-xr-x  2 root root  160 Jan  3 19:34 by-uuid/
+drwxr-xr-x  2 root root  180 Jan  3 19:34 by-partuuid/
+drwxr-xr-x  2 root root   60 Jan  3 19:34 by-partlabel/
+drwxr-xr-x  2 root root   60 Jan  3 19:34 by-label/
+drwxr-xr-x  2 root root  440 Jan  3 19:34 by-id/
+drwxr-xr-x  8 root root  160 Jan  3 19:34 ./
+drwxr-xr-x 19 root root 3540 Jan  5 23:18 ../
+{% endhighlight %}
+
+The partition wityh the UUID = **45241cf1-4fe9-4357-b752-76d11945eaa2** is `/dev/sda3`. Mounted as the root partition on my machine.
+
+{% highlight conf %}
+❯ ll /dev/disk/by-uuid/45241cf1-4fe9-4357-b752-76d11945eaa2
+lrwxrwxrwx 1 root root 10 Jan  3 18:34 /dev/disk/by-uuid/45241cf1-4fe9-4357-b752-76d11945eaa2 -> ../../sda3
+{% endhighlight %}
+
+
+
+# CITER PAGE 47 du livre "The sysfs" Device Path
+As you may have also noticed on the first line, the `udevadm` command tells us where the kernel stores my disk info on the sysfs Device Path........
+{% highlight conf %}
+❯ ll /sys/devices/pci0000:00/0000:00:1f.2/ata3/host2/target2:0:0/2:0:0:0/block/sda/
+total 0
+-rw-r--r--  1 root root 4096 Jan  6 00:31 uevent
+lrwxrwxrwx  1 root root    0 Jan  6 00:31 subsystem -> ../../../../../../../../../class/block/
+drwxr-xr-x  3 root root    0 Jan  6 00:31 ../
+drwxr-xr-x 13 root root    0 Jan  6 00:31 ./
+-r--r--r--  1 root root 4096 Jan  6 00:31 stat
+drwxr-xr-x  5 root root    0 Jan  6 00:32 sda3/
+drwxr-xr-x  5 root root    0 Jan  6 00:49 sda4/
+-r--r--r--  1 root root 4096 Jan  6 00:49 dev
+drwxr-xr-x  5 root root    0 Jan  6 00:49 sda6/
+drwxr-xr-x  5 root root    0 Jan  6 00:49 sda5/
+-r--r--r--  1 root root 4096 Jan  6 00:49 range
+lrwxrwxrwx  1 root root    0 Jan  6 00:49 device -> ../../../2:0:0:0/
+drwxr-xr-x  2 root root    0 Jan  6 01:54 trace/
+drwxr-xr-x  2 root root    0 Jan  6 01:54 slaves/
+-r--r--r--  1 root root 4096 Jan  6 01:54 size
+-r--r--r--  1 root root 4096 Jan  6 01:54 ro
+-r--r--r--  1 root root 4096 Jan  6 01:54 removable
+drwxr-xr-x  3 root root    0 Jan  6 01:54 queue/
+drwxr-xr-x  2 root root    0 Jan  6 01:54 power/
+drwxr-xr-x  3 root root    0 Jan  6 01:54 mq/
+drwxr-xr-x  2 root root    0 Jan  6 01:54 integrity/
+-r--r--r--  1 root root 4096 Jan  6 01:54 inflight
+drwxr-xr-x  2 root root    0 Jan  6 01:54 holders/
+-r--r--r--  1 root root 4096 Jan  6 01:54 hidden
+-r--r--r--  1 root root 4096 Jan  6 01:54 ext_range
+-rw-r--r--  1 root root 4096 Jan  6 01:54 events_poll_msecs
+-r--r--r--  1 root root 4096 Jan  6 01:54 events_async
+-r--r--r--  1 root root 4096 Jan  6 01:54 events
+-r--r--r--  1 root root 4096 Jan  6 01:54 discard_alignment
+-r--r--r--  1 root root 4096 Jan  6 01:54 capability
+lrwxrwxrwx  1 root root    0 Jan  6 01:54 bdi -> ../../../../../../../../virtual/bdi/8:0/
+-r--r--r--  1 root root 4096 Jan  6 01:54 alignment_offset
+{% endhighlight %}
+
+[/etc/fstab SCREENSHOT]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/etc-fstab.png
 [IDE]: https://en.wikipedia.org/wiki/Parallel_ATA
 [SCSI]: https://en.wikipedia.org/wiki/SCSI
 [SATA]: https://en.wikipedia.org/wiki/Serial_ATA
 [NVMe]: https://en.wikipedia.org/wiki/NVM_Express
+[How LINUX works]: https://www.amazon.com/How-Linux-Works-2nd-Superuser/dp/1593275676/ref=pd_sbs_6/138-3605639-6306950?pd_rd_w=VbOZp&pf_rd_p=3676f086-9496-4fd7-8490-77cf7f43f846&pf_rd_r=M9DHB2SP9RBDTTXJDABC&pd_rd_r=44e100a9-47d5-4277-ab95-fb79c24f291d&pd_rd_wg=GJ2MT&pd_rd_i=1593275676&psc=1
+[How LINUX works SCREENSHOT]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/How-Linux-works-2nd-edition.jpg
+[TEST]: /assets/2021-12-30-how-to-list-your-hardware-on-Linux/essai-Inkscape.svg.2022_01_29_16_20_12.0.svg
