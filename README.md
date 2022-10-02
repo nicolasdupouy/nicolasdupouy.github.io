@@ -33,6 +33,9 @@ Load rbenv automatically by appending the following to the shell configuration f
     $ echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.profile
 
 ### 3) Initialize the project (in the project directory)
+#### [FreeBSD]
+
+
 #### [Debian]
     $ bundle install
 
