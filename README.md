@@ -47,15 +47,15 @@ For M1 Mac, we may need to do a few extra steps - update bundler, add webrick, a
 ## Serve the site locally
 Build the site and make it available on a local server (http://localhost:4000):
 
-    > bundle exec jekyll serve
+    > JEKYLL_ENV=local bundle exec jekyll serve
 
 Pass the `--port` option to specify another port
 
-    > bundle exec jekyll serve --port 4002
+    > JEKYLL_ENV=local bundle exec jekyll serve --port 4002
 
 Pass the `--livereload` option to automatically refresh the page with each change you make to the source files:
 
-    > bundle exec jekyll serve --livereload
+    > JEKYLL_ENV=local bundle exec jekyll serve --livereload
 
 [Jekyll quickstart]: https://jekyllrb.com/docs/
 
@@ -89,6 +89,11 @@ int main()
 ### Expected result:
 
 ![C++ Program to Find Size of int, float, double and char in Your System](/assets/exemple-cpp-code-for-README.png)
+
+
+## Difference between {%- do-someting -%} and {% do-someting %} ?
+https://stackoverflow.com/questions/59487863/jeykyll-what-is-the-difference-between-do-someting-and-do-someting
+https://shopify.github.io/liquid/basics/whitespace/
 
 
 [What Are The Supported Language Highlighters In Jekyll]: https://simpleit.rocks/ruby/jekyll/what-are-the-supported-language-highlighters-in-jekyll/
