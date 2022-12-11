@@ -12,6 +12,9 @@ twitter_username:       nicolas_dupouy
 github_username:        nicolasdupouy
 stackoverflow_username: 2017611/nicolas-dupouy
 
+# Analytics
+google_analytics_id: G-0TJ14XDNJL
+
 # Jekyll
 highlighter: rouge
 markdown: kramdown

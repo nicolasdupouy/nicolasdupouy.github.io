@@ -1,2 +1,2 @@
 #!/bin/sh
-bundle exec jekyll serve --livereload
+JEKYLL_ENV=local bundle exec jekyll serve --livereload
