@@ -90,5 +90,10 @@ more /boot/loader.conf
 After this little changes, I just had to type `boot` and start over.
 In fact, my install with `pkg` was not ok, so I just had to remove it and re-installed with the [ports](https://www.freebsd.org/ports/).
 
+## Credits
+
+To solve this issue, I found help [here][freebsd_forums_help] in the FreeBSD forums. Thanks for the tip [mcochris](https://forums.freebsd.org/members/mcochris.34558/).
+
 [FreeBSD]: https://www.freebsd.org/
 [kldload]: https://www.freebsd.org/cgi/man.cgi?kldload(8)
+[freebsd_forums_help]: https://forums.freebsd.org/threads/how-to-boot-with-messed-up-boot-loader-conf.64019/
