@@ -5,7 +5,18 @@ layout: default
     <h1>Articles</h1>
     <ul class="posts">
         {% for post in site.posts %}
+        {% if post.type == "ARTICLE" %}
         <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h1>Tips</h1>
+    <ul class="posts">
+        {% for post in site.posts %}
+        {% if post.type == "TIP" %}
+        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+        {% endif %}
         {% endfor %}
     </ul>
 </div>

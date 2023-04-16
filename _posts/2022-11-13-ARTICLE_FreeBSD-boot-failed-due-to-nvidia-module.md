@@ -1,6 +1,7 @@
 ---
 layout:             post
 title:              "[FreeBSD] boot failed due to nvidia module"
+type:               "ARTICLE"
 date-publication:   2022-11-13 21:00:00 +0200
 categories:         FreeBSD BSD kernel hardware terminal boot nvidia
 permalink:          /2022-11-13-FreeBSD-boot-failed-due-to-nvidia-module/
