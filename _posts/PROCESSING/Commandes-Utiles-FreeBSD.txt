@@ -1,0 +1,32 @@
+man man
+man hier
+
+zfs list -o space
+zfs list -o mountpoint,name,avail
+dmesg OU cat /var/run/dmesg.boot
+sudo pw groupmod video -m nicolas
+
+
+
+sudo freebsd-update fetch
+sudo freebsd-update install
+sudo freebsd-update -r 13.2-RELEASE upgrade
+
+
+
+sudo pkg install gnome-shell
+sudo pw groupmod video -m nicolas
+sudo pkg install gnome-tweaks
+sudo pkg install gnome-terminal
+
+ibus engine => Choix de la langue de base dans GDM ?
+
+
+# Services
+service -e
+service -l
+service sshd status
+service sshd restart
+
+# Keyboard layout
+https://kostob.de/2021/07/23/freebsd-set-keyboard-layout/
